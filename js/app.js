@@ -29,19 +29,16 @@ function checkGuess() {
     guessHistoryA.push(guess);
     guessHistory.textContent = guessHistoryA;
 
-// generate the computer's guess
-  const compGuess = generateCompNumber();
-  computerGuess.textContent = compGuess;
-
 // check to see if player has won
-  if(guess === compGuess) {
-     guessMessage.textContent = "You Won! ";
-     endGame();
-  } else if (guess > compGuess) {
-     guessMessage.textContent = "Your guess is too high ";
-  } else if (guess < compGuess) {
-     guessMessage.textContent = "Your guess is too low. ";
-  } 
+  if(guess === compNumber) {
+    guessMessage.textContent = "You Won! ";
+    computerGuess.textContent = compNumber;
+    endGame();
+ } else if (guess > compNumber) {
+    guessMessage.textContent = "Your guess is too high ";
+ } else if (guess < compNumber) {
+    guessMessage.textContent = "Your guess is too low. ";
+ } 
 
 // decrease attempts
   attemptsLeft --;
@@ -52,6 +49,7 @@ function checkGuess() {
   } else if (attemptsLeft <= 0) {
     guessMessage.textContent = "You lost and used your 3 tries, play again"
     endGame();
+    computerGuess.textContent = compNumber;
   } 
 }    
 
@@ -68,7 +66,7 @@ function restartGame() {
   attemptsLeft = 3;
   compNumber = generateCompNumber();
   guessHistoryA = [];
-  guessInput.textContent = '';
+  guessInput.value = '';
   guessMessage.textContent = '';
   currentGuess.textContent = '';
   computerGuess.textContent = '';
