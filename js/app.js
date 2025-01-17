@@ -23,8 +23,16 @@ function checkGuess() {
   if (isGameOver) return;
   
   const guess = parseInt(guessInput.value);
-  if(isNaN(guess)) return;
+// verify input guess
+  if(isNaN(guess)) {
+    guessMessage.textContent = "Enter a valid number.";
+    return;
+  } else if (guess < 1 || guess > 10) {
+    guessMessage.textContent = "Please enter a number between 1 and 10.";
+    return;
+  }
 
+// output the guess and additional guess tries
     currentGuess.textContent = guess;
     guessHistoryA.push(guess);
     guessHistory.textContent = guessHistoryA;
@@ -46,11 +54,13 @@ function checkGuess() {
 // attempts left
   if (attemptsLeft > 0) {
     guessMessage.textContent += " You have " + (attemptsLeft) + " attempts left.";
+  } else if (attemptsLeft <= 0 && guess === compNumber) {
+    guessMessage.textContent = "You Won! ";
   } else if (attemptsLeft <= 0) {
     guessMessage.textContent = "You lost and used your 3 tries, play again"
-    endGame();
     computerGuess.textContent = compNumber;
-  } 
+    endGame();
+  }
 }    
 
 // end game
